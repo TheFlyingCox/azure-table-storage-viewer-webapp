@@ -47,16 +47,17 @@ module.exports.getLastNRows = function(azure, tableService, columns, n, sort, ca
       return Object.keys(e)
         .filter(k => k !== '.metadata')
         .reduce((a, b) => {
+          let keyname = b
           if (b === 'Node') {
-            b = 'VM'
+            keyname = 'VM'
           }
           if (b === 'Compliance') {
-            b = 'Scan'
+            keyname = 'Scan'
           }
           if (b === 'Arc') {
-            b = 'Log'
+            keyname = 'Log'
           }
-          const flatProp = { [b]: e[b]._ };
+          const flatProp = { [keyname]: e[b]._ };
           return Object.assign(a, flatProp);
         }, {});
     });
