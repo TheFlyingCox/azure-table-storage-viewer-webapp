@@ -46,22 +46,19 @@ module.exports.getLastNRows = function(azure, tableService, columns, n, sort, ca
     const rows = result.entries.map(e => {
       return Object.keys(e)
         .filter(k => k !== '.metadata')
-        .map(colText => {
-          if (colText === 'Node') {
-            colText = 'VM'
+        .reduce((a, b) => {
+          if (b === 'Node') {
+            b = 'VM'
           }
-          if (colText === 'Compliance') {
-            colText = 'Scan'
+          if (b === 'Compliance') {
+            b = 'Scan'
           }
-          if (colText === 'Arc') {
-            colText = 'Log'
+          if (b === 'Arc') {
+            b = 'Log'
           }
-          return colText
-        }));
-        //.reduce((a, b) => {
-        //  const flatProp = { [b]: e[b]._ };
-        //  return Object.assign(a, flatProp);
-        //}, {});
+          const flatProp = { [b]: e[b]._ };
+          return Object.assign(a, flatProp);
+        }, {});
     });
 
     const sortStrategy = (sort === 'Timestamp') ? byTime : byField(sort);
