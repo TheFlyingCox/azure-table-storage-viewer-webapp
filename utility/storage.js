@@ -51,8 +51,8 @@ module.exports.getLastNRows = function(azure, tableService, columns, n, sort, ca
           return Object.assign(a, flatProp);
         }, {});
     });
-
-    rows[0] = rows[0].map(colText => {
+    console.log(JSON.stringify(rows, null, 2))
+    /*rows[0] = rows[0].map(colText => {
       if (colText === 'Node') {
         colText = 'VM'
       }
@@ -64,7 +64,7 @@ module.exports.getLastNRows = function(azure, tableService, columns, n, sort, ca
       }
       return colText
     });
-
+    */
     const sortStrategy = (sort === 'Timestamp') ? byTime : byField(sort);
     const sorted = rows.slice().sort(sortStrategy);
 
