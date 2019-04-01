@@ -46,25 +46,24 @@ module.exports.getLastNRows = function(azure, tableService, columns, n, sort, ca
     const rows = result.entries.map(e => {
       return Object.keys(e)
         .filter(k => k !== '.metadata')
+        .map(colText => {
+          if (colText === 'Node') {
+            colText = 'VM'
+          }
+          if (colText === 'Compliance') {
+            colText = 'Scan'
+          }
+          if (colText === 'Arc') {
+            colText = 'Log'
+          }
+          return colText
+        })
         .reduce((a, b) => {
           const flatProp = { [b]: e[b]._ };
           return Object.assign(a, flatProp);
         }, {});
     });
-    console.log(JSON.stringify(rows, null, 2))
-    /*rows[0] = rows[0].map(colText => {
-      if (colText === 'Node') {
-        colText = 'VM'
-      }
-      if (colText === 'Compliance') {
-        colText = 'Scan'
-      }
-      if (colText === 'Arc') {
-        colText = 'Log'
-      }
-      return colText
-    });
-    */
+
     const sortStrategy = (sort === 'Timestamp') ? byTime : byField(sort);
     const sorted = rows.slice().sort(sortStrategy);
 
