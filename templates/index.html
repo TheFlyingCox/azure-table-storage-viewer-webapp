@@ -17,16 +17,8 @@
       <td>{{this.VM}}</td>
       <td>{{this.OS}}</td>
       <td style="{{#ifTrue this.AV}}{{/ifTrue}}">{{this.AV}}</td>
-      {{#if this}}
-        <td>{{this.Scan}}</td>
-      {{else}}
-        <td>{{this.Scan}}</td>
-      {{/if}}
-      {{#if this}}
-        <td>{{this.Log}}</td>
-      {{else}}
-        <td>{{this.Log}}</td>
-      {{/if}}
+      <td style="{{#ifTrue this.Scan}}{{/ifTrue}}">{{this.Scan}}</td>
+      <td style="{{#ifTrue this.Log}}{{/ifTrue}}">{{this.Log}}</td>
     </tr>
   {{/each}}
 </table>
