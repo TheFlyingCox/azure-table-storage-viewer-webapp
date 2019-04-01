@@ -1,3 +1,4 @@
+const Handlebars = require('handlebars');
 const Path = require('path');
 const Hapi = require('hapi');
 const Hoek = require('hoek');
@@ -30,13 +31,15 @@ server.register(require('inert'), (err) => {
   });
 });
 
+Handlebars.registerHelper('ifTrue', text => text === 'True');
+
 server.register(require('vision'), (err) => {
 
   Hoek.assert(!err, err);
 
   server.views({
     engines: {
-        html: require('handlebars')
+        html: Handlebars
     },
     relativeTo: __dirname,
       path: './templates',
@@ -56,7 +59,7 @@ server.register(require('vision'), (err) => {
           console.log(error);
           return reply(error);
         }
-        
+
         const viewData = {
           rows: rows,
           storageName: process.env.AZURE_STORAGE_ACCOUNT,

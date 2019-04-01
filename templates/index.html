@@ -5,16 +5,33 @@
 <table class="table table-striped">
   <tr>
     {{#with rows.[0]}}
-      {{#each this}}
-        <th>{{@key}}</th>
-      {{/each}}
+      <th>VM</th>
+      <th>OS</th>
+      <th>AV</th>
+      <th>Scan</th>
+      <th>Log</th>
     {{/with}}
   </tr>
   {{#each rows}}
     <tr>
-      {{#each this}}
-          <td>{{this}}</td>
-      {{/each}}
+      <td>{{this.VM}}</td>
+      <td>{{this.OS}}</td>
+      <td
+      {{#isTrue this.AV}}
+        style='background-color: green;'
+      {{/isTrue}}
+      >{{this.AV}}</td>
+
+      {{#if this}}
+        <td>{{this.Scan}}</td>
+      {{else}}
+        <td>{{this.Scan}}</td>
+      {{/if}}
+      {{#if this}}
+        <td>{{this.Log}}</td>
+      {{else}}
+        <td>{{this.Log}}</td>
+      {{/if}}
     </tr>
   {{/each}}
 </table>
