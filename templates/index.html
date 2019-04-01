@@ -16,12 +16,7 @@
     <tr>
       <td>{{this.VM}}</td>
       <td>{{this.OS}}</td>
-      <td
-      {{#ifTrue this.AV}}
-        style='background-color: green;'
-      {{/ifTrue}}
-      >{{this.AV}}</td>
-
+      <td style={{#ifTrue this.AV}}{{/ifTrue}}>{{this.AV}}</td>
       {{#if this}}
         <td>{{this.Scan}}</td>
       {{else}}

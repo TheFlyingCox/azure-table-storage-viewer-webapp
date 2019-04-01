@@ -31,7 +31,7 @@ server.register(require('inert'), (err) => {
   });
 });
 
-Handlebars.registerHelper('ifTrue', text => text === 'True');
+Handlebars.registerHelper('ifTrue', text => text === 'True' ? "style='background-color: green;'" : "style='background-color: inherit;'");
 
 server.register(require('vision'), (err) => {
 
