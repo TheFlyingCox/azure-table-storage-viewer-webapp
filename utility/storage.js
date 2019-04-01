@@ -1,6 +1,6 @@
 // convert fake dates
 function getTime(time) {
-  if(typeof time !== 'undefined') { 
+  if(typeof time !== 'undefined') {
     return (new Date(time.toString())).getTime();
   }
 }
@@ -41,7 +41,7 @@ module.exports.getLastNRows = function(azure, tableService, columns, n, sort, ca
   tableService.queryEntities(process.env.TABLE_NAME, query, null, function(error, result, response) {
     if (error) return callback(error);
 
-    // each prop in the results comes back with a nested prop of `_`, 
+    // each prop in the results comes back with a nested prop of `_`,
     // so this flattens the props and filters out metadata prop also
     const rows = result.entries.map(e => {
       return Object.keys(e)
@@ -51,7 +51,20 @@ module.exports.getLastNRows = function(azure, tableService, columns, n, sort, ca
           return Object.assign(a, flatProp);
         }, {});
     });
-    
+
+    rows[0] = rows[0].map(colText => {
+      if (colText === 'Node') {
+        colText = 'VM'
+      }
+      if (colText === 'Compliance') {
+        colText = 'Scan'
+      }
+      if (colText === 'Arc') {
+        colText = 'Log'
+      }
+      return colText
+    });
+
     const sortStrategy = (sort === 'Timestamp') ? byTime : byField(sort);
     const sorted = rows.slice().sort(sortStrategy);
 
