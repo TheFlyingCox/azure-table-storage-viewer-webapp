@@ -1,5 +1,3 @@
-'use strict';
-
 const Path = require('path');
 const Hapi = require('hapi');
 const Hoek = require('hoek');
