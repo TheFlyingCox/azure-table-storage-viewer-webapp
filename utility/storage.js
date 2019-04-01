@@ -57,7 +57,11 @@ module.exports.getLastNRows = function(azure, tableService, columns, n, sort, ca
           if (b === 'Arc') {
             keyname = 'Log'
           }
-          const flatProp = { [keyname]: e[b]._ };
+          let value = e[b]._
+          if (b === 'OS') {
+            value = e[b]._.split(":")[0]
+          }
+          const flatProp = { [keyname]: value };
           return Object.assign(a, flatProp);
         }, {});
     });
