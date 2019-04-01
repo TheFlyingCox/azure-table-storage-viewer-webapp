@@ -102,7 +102,7 @@
             "AZURE_STORAGE_ACCOUNT": "[parameters('azureStorageAccountName')]",
             "TABLE_NAME": "[parameters('azureStorageTableName')]",
             "AZURE_STORAGE_ACCOUNT_KEY": "[parameters('azureStorageAccountKey')]",
-            "WEBSITE_NPM_DEFAULT_VERSION": "3.3.12",
+            "WEBSITE_NPM_DEFAULT_VERSION": "3.10.8",
             "WEBSITE_NODE_DEFAULT_VERSION": "6.9.1"
           }
         },
