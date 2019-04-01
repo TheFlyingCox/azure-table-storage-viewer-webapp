@@ -57,11 +57,11 @@ module.exports.getLastNRows = function(azure, tableService, columns, n, sort, ca
             colText = 'Log'
           }
           return colText
-        })
-        .reduce((a, b) => {
-          const flatProp = { [b]: e[b]._ };
-          return Object.assign(a, flatProp);
-        }, {});
+        }));
+        //.reduce((a, b) => {
+        //  const flatProp = { [b]: e[b]._ };
+        //  return Object.assign(a, flatProp);
+        //}, {});
     });
 
     const sortStrategy = (sort === 'Timestamp') ? byTime : byField(sort);
