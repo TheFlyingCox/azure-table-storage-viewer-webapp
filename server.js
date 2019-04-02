@@ -31,7 +31,7 @@ server.register(require('inert'), (err) => {
   });
 });
 
-Handlebars.registerHelper('ifTrue', {text => text === 'True' ? "background-color: green;"} : {text => text === 'Error' ? "background-color: red;"} : "background-color: inherit;");
+Handlebars.registerHelper('ifTrue', (text => text === 'True') ? "background-color: green;" : (text => text === 'Error') ? "background-color: red;" : "background-color: inherit;");
 
 server.register(require('vision'), (err) => {
 
