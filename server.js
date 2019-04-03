@@ -32,11 +32,8 @@ server.register(require('inert'), (err) => {
 });
 
 Handlebars.registerHelper('ifTrue', text => text === 'True' ? "background-color: #66ff66;" : text === 'N/A' ? "background-color: #66ff66;" : text === 'Error' ? "background-color: #ff3737;" : "background-color: inherit;");
-Handlebars.registerHelper('tFormat', time => {
-  const t = New Date(time);
-  t.toLocaleString();
-});
-                          
+Handlebars.registerHelper('tFormat', time => time.toLocaleString());
+
 server.register(require('vision'), (err) => {
 
   Hoek.assert(!err, err);
