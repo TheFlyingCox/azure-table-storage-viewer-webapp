@@ -32,7 +32,10 @@ server.register(require('inert'), (err) => {
 });
 
 Handlebars.registerHelper('ifTrue', text => text === 'True' ? "background-color: #66ff66;" : text === 'N/A' ? "background-color: #66ff66;" : text === 'Error' ? "background-color: #ff3737;" : "background-color: inherit;");
-Handlebars.registerHelper('tFormat', time => time.toLocaleString());
+Handlebars.registerHelper('tFormat', function(time) {
+   var newTime = New Date(time);
+   return newTime.toLocaleString();
+});
 
 server.register(require('vision'), (err) => {
 
