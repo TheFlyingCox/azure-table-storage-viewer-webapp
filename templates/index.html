@@ -20,7 +20,7 @@
       <td style="{{#ifTrue this.AV}}{{/ifTrue}}">{{this.AV}}</td>
       <td style="{{#ifTrue this.Scan}}{{/ifTrue}}">{{this.Scan}}</td>
       <td style="{{#ifTrue this.Log}}{{/ifTrue}}">{{this.Log}}</td>
-      <td>{{this.Timestamp}}</td>
+      <td>{{#tFormat this.Timestamp}}{{/tformat}}</td>
     </tr>
   {{/each}}
 </table>
