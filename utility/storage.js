@@ -43,18 +43,18 @@ module.exports.getLastNRows = function(azure, tableService, columns, n, sort, ca
 
       // each prop in the results comes back with a nested prop of `_`,
       // so this flattens the props and filters out metadata prop also
-      const rows = result.entries.map(e => {
+      /*const rows = result.entries.map(e => {
         return Object.keys(e)
           .filter(k => k !== '.metadata')
           .reduce((a, b) => {
             const flatProp = { [b]: e[b]._ };
             return Object.assign(a, flatProp);
           }, {});
-      });
+      });*/
 
     const sortStrategy = (sort === 'Timestamp') ? byTime : byField(sort);
-    const sorted = rows.slice().sort(sortStrategy);
+    //const sorted = rows.slice().sort(sortStrategy);
 
-    return callback(null, sorted);
+    return callback(null, sort);
   });
 };
