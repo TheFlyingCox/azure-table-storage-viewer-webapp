@@ -38,33 +38,19 @@ module.exports.getLastNRows = function(azure, tableService, columns, n, sort, ca
     .select(columns)
     .top(n);
 
-  tableService.queryEntities(process.env.TABLE_NAME, query, null, function(error, result, response) {
-    if (error) return callback(error);
+    tableService.queryEntities(process.env.TABLE_NAME, query, null, function(error, result, response) {
+      if (error) return callback(error);
 
-    // each prop in the results comes back with a nested prop of `_`,
-    // so this flattens the props and filters out metadata prop also
-    const rows = result.entries.map(e => {
-      return Object.keys(e)
-        .filter(k => k !== '.metadata')
-        .reduce((a, b) => {
-          let keyname = b
-    //      if (b === 'Node') {
-    //        keyname = 'VM'
-    //      }
-    //      if (b === 'Compliance') {
-    //        keyname = 'Scan'
-    //      }
-    //      if (b === 'Arc') {
-    //        keyname = 'Log'
-    //      }
-          let value = e[b]._
-    //      if (b === 'OS') {
-    //        value = e[b]._.split(":")[0]
-    //      }
-          const flatProp = { [keyname]: value };
-          return Object.assign(a, flatProp);
-        }, {});
-    });
+      // each prop in the results comes back with a nested prop of `_`,
+      // so this flattens the props and filters out metadata prop also
+      const rows = result.entries.map(e => {
+        return Object.keys(e)
+          .filter(k => k !== '.metadata')
+          .reduce((a, b) => {
+            const flatProp = { [b]: e[b]._ };
+            return Object.assign(a, flatProp);
+          }, {});
+      });
 
     const sortStrategy = (sort === 'Timestamp') ? byTime : byField(sort);
     const sorted = rows.slice().sort(sortStrategy);
