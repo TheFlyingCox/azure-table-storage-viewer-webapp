@@ -23,7 +23,7 @@ function byTime(a, b) {
   }
 }
 
-/*function byField(field) {
+function byField(field) {
   return function(a, b) {
     const numeric = typeof a[field] === 'number' && typeof b[field] === 'number';
     const aStr = a[field].toString();
@@ -32,7 +32,7 @@ function byTime(a, b) {
     return aStr.localeCompare(bStr, 'kn', {numeric: numeric});
   }
 };
-*/
+
 module.exports.getLastNRows = function(azure, tableService, columns, n, sort, callback) {
   const query = new azure.TableQuery()
     .select(columns)
@@ -66,8 +66,8 @@ module.exports.getLastNRows = function(azure, tableService, columns, n, sort, ca
         }, {});
     });
 
-    //const sortStrategy = (sort === 'Timestamp') ? byTime : byField(sort);
-    //const sorted = rows.slice().sort(sortStrategy);
+    const sortStrategy = (sort === 'Timestamp') ? byTime : byField(sort);
+    const sorted = rows.slice().sort(sortStrategy);
 
     return callback(null, sorted);
   });
