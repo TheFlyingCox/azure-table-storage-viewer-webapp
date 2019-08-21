@@ -16,12 +16,13 @@
   </tr>
   {{#each rows}}
     <tr>
-      <td>{{this.VM}}</td>
-      <td>{{this.OS}}</td>
-      <td style="{{#ifTrue this.AV}}{{/ifTrue}}">{{this.AV}}</td>
-      <td style="{{#ifTrue this.Scan}}{{/ifTrue}}">{{this.Scan}}</td>
-      <td style="{{#ifTrue this.Log}}{{/ifTrue}}">{{this.Log}}</td>
-      <td>{{#tFormat this.Timestamp}}{{/tFormat}}</td>
+      <td>{{this.Name}}</td>
+      <td>{{this.Function}}</td>
+      <td>{{this.Wave}}</td>
+      <td>{{this.Subnet}}</td>
+      <td>{{this.IP}}</td>
+      <td>{{this.Disks}}</td>
+      <td>{{this.Size}}</td>
     </tr>
   {{/each}}
 </table>
