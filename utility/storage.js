@@ -57,7 +57,7 @@ module.exports.getLastNRows = function(azure, tableService, columns, n, sort, ca
     //      if (b === 'Arc') {
     //        keyname = 'Log'
     //      }
-    //      let value = e[b]._
+          let value = e[b]._
     //      if (b === 'OS') {
     //        value = e[b]._.split(":")[0]
     //      }
