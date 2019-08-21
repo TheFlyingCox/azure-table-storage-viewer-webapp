@@ -47,7 +47,7 @@ module.exports.getLastNRows = function(azure, tableService, columns, n, sort, ca
       return Object.keys(e)
         .filter(k => k !== '.metadata')
         .reduce((a, b) => {
-    //      let keyname = b
+          let keyname = b
     //      if (b === 'Node') {
     //        keyname = 'VM'
     //      }
