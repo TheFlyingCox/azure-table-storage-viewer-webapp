@@ -2,16 +2,16 @@
 
 <!--<p>Viewing most recent results from storage '{{storageName}}', '{{tableName}}' table</p>-->
 
-<table class="table table-striped">
+<table id="inventoryTable" class="table table-striped">
   <tr>
     {{#with rows.[0]}}
-      <th>Name</th>
-      <th>Function</th>
-      <th>Wave</th>
-      <th>Subnet</th>
-      <th>IP</th>
-      <th>Disks</th>
-      <th>Size</th>
+      <th onclick="sortTable(0)">Name</th>
+      <th onclick="sortTable(1)">Function</th>
+      <th onclick="sortTable(2)">Wave</th>
+      <th onclick="sortTable(3)">Subnet</th>
+      <th onclick="sortTable(4)">IP</th>
+      <th onclick="sortTable(5)">Disks</th>
+      <th onclick="sortTable(6)">Size</th>
     {{/with}}
   </tr>
   {{#each rows}}
