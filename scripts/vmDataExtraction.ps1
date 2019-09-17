@@ -9,16 +9,16 @@ Select-AzSubscription -SubscriptionId $sourceSubscriptionId
 $location = 'useast2'
 
 #Set the name of the target storage account
-$storageAccountName = 'sainventorytest'
+$storageAccountName = 'sainventoryappva'
 
 #Set the name of the target storage table
 $tableName = 'inventoryTable'
 
 #Set the resource group name containing the storage account
-$resourceGroupName = 'rg_inventorytest'
+$resourceGroupName = 'rg_inventory'
 
 #Check for existing Resource Group. Create if non-existing
-try {
+<#try {
     $resourceGroup = Get-AzResourceGroup -Name $resourceGroupName -ErrorAction Stop
 } catch {
     $resourceGroup = New-AzResourceGroup -Name $resourceGroupName -Location $location
@@ -34,16 +34,20 @@ try {
       -SkuName Standard_LRS `
       -Kind Storage
 }
+#>
 
 #Set the storage context
-$ctx = $storageAccount.Context
+$ctx = New-AzStorageContext -ConnectionString "DefaultEndpointsProtocol=https;AccountName=sainventoryappva;AccountKey=JQVMC9ZzC0pfVWUgwz/XQLpqJ8sj5eqxfkDw2z+tp1KiOyqzp+YcHrlwdWxqFVuhU1yHYoGZrTXFUT40CUO8JA==;EndpointSuffix=core.usgovcloudapi.net"
+#$ctx = $storageAccount.Context
+
+$table = Get-AzStorageTable -Context $ctx -Name $tableName
 
 #Check for existing Table in target Storage Account. Create if non-existing
-try {
-    $table = Get-AzTableTable -resourceGroup $resourceGroupName -TableName $tableName -storageAccountName $storageAccountName -ErrorAction Stop
-} catch {
-    $table = New-AzStorageTable -Name $tableName -Context $ctx
-}
+#try {
+#    $table = Get-AzTableTable -resourceGroup $resourceGroupName -TableName $tableName -storageAccountName $storageAccountName -ErrorAction Stop
+#} catch {
+#    $table = New-AzStorageTable -Name $tableName -Context $ctx
+#}
 
 #Get all the VMs for the target subscription
 $VMS = Get-AzVM
