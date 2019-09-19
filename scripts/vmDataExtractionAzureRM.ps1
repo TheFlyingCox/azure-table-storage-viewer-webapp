@@ -2,8 +2,36 @@
 #Currently set to U360-Sandbox-Gov
 $sourceSubscriptionId='f4b64c47-a43e-46e4-abc3-0097a2b9532e'
 
+# Sign into Azure and select the subscription
+Disable-AzureRmDataCollection
+
+$connectionName = "AzureRunAsConnection"
+try
+{
+	# Get the connection "AzureRunAsConnection "
+	$servicePrincipalConnection = Get-AutomationConnection -Name $connectionName
+
+	"Logging in to Azure..."
+	$Account = Add-AzureRmAccount `
+ 		-ServicePrincipal `
+ 		-TenantId $servicePrincipalConnection.TenantId `
+ 		-ApplicationId $servicePrincipalConnection.ApplicationId `
+ 		-CertificateThumbprint $servicePrincipalConnection.CertificateThumbprint `
+ 		-Environment $Environment
+}
+catch {
+	if (!$servicePrincipalConnection)
+	{
+		$ErrorMessage = "Connection $connectionName not found."
+		throw $ErrorMessage
+	} else {
+		Write-Error -Message $_.Exception
+		throw $_.Exception
+	}
+}
+
 #Set the context to the subscription Id where VMs exists
-Select-AzureRmSubscription -SubscriptionId $sourceSubscriptionId
+#Select-AzureRmSubscription -SubscriptionId $sourceSubscriptionId
 
 #Set the desired location
 $location = 'useast2'
