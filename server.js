@@ -51,7 +51,7 @@ server.register(require('vision'), (err) => {
     method: 'GET',
     path: '/',
     handler: function (request, reply) {
-      const numRows = request.query.rows ? request.query.rows : 100;
+      const numRows = request.query.rows ? request.query.rows : 300;
       const columns = process.env.TABLE_COLUMNS.split(',').map(c => c.trim());
       const sort = request.query.sort && columns.includes(request.query.sort) ? request.query.sort : 'Timestamp';
 
