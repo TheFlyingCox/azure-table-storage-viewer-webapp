@@ -29,6 +29,16 @@ server.register(require('inert'), (err) => {
         }
     }
   });
+
+  server.route({
+    method: 'GET',
+    path: '/dist/{param*}',
+    handler: {
+        directory: {
+            path: 'public/dist'
+        }
+    }
+  });
 });
 
 Handlebars.registerHelper('ifTrue', text => text === 'True' ? "background-color: #66ff66;" : text === 'N/A' ? "background-color: #66ff66;" : text === 'Error' ? "background-color: #ff3737;" : "background-color: inherit;");

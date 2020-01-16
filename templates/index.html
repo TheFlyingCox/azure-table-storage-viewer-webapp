@@ -27,7 +27,19 @@
     </tr>
   {{/each}}
 </table>
+<script src="js/column-resizer.js"></script>
+<script type="text/javascript">
+   window.onload = function() {
+      let resizable = ColumnResizer.default;
 
+        new resizable(document.querySelector("#inventoryTable"),{
+            liveDrag:true,
+            draggingClass:"rangeDrag",
+            gripInnerHtml:"<div class='rangeGrip'></div>",
+            minWidth:8
+        });
+   };
+</script>
 <script>
 //Sort the table
 function sortTable(n) {
