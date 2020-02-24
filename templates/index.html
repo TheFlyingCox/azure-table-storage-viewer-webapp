@@ -13,6 +13,8 @@
       <th onclick="sortTable(4)">IP</th>
       <th onclick="sortTable(5)">Disks</th>
       <th onclick="sortTable(6)">Size</th>
+      <th onclick="sortTable(5)">Start</th>
+      <th onclick="sortTable(6)">Stop</th>
     {{/with}}
   </tr>
   {{#each rows}}
@@ -24,6 +26,8 @@
       <td>{{this.IP}}</td>
       <td>{{this.Disks}}</td>
       <td>{{this.Size}}</td>
+      <td>{{this.Autostart}}</td>
+      <td>{{this.Autostop}}</td>
     </tr>
   {{/each}}
 </table>
